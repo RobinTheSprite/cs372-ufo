@@ -1,0 +1,5 @@
+All of our user stories, to date:
+
+   - I want to find my files easily
+
+   - I want organize my files by file extension
