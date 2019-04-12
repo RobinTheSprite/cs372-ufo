@@ -29,9 +29,9 @@ namespace ufo
             cout << "dummy" << endl;
         }
 
-        vector<WIN32_FIND_DATA> retrieveWin()
+        vector<ufo::file> retrieveWin()
         {
-            vector<WIN32_FIND_DATA> dummy;
+            vector<ufo::file> dummy;
             return dummy;
         }
 
