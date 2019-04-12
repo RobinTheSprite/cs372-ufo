@@ -14,8 +14,8 @@ using std::endl;
 namespace ufo
 {
 
-//printError
-//Tell me what the last error in this thread was
+    //printError
+    //Tell me what the last error in this thread was
     void printError()
     {
         LPTSTR errorMessage = nullptr;
@@ -35,8 +35,6 @@ namespace ufo
     SYSTEMTIME getDate(FILETIME filetime)
     {
         SYSTEMTIME systemtime;
-        char localDate[255], localTime[255];
-
         FileTimeToLocalFileTime(&filetime, &filetime);
         FileTimeToSystemTime(&filetime, &systemtime);
         return systemtime;
@@ -46,15 +44,21 @@ namespace ufo
     {
         ufo::file file;
         file.name = metaData.cFileName;
-        file.size = (metaData.nFileSizeHigh * (MAXDWORD + 1)) + metaData.nFileSizeLow;
+        file.size = (metaData.nFileSizeHigh * MAXDWORD) + metaData.nFileSizeLow; //MAXDWORD might need to be
+                                                                                 //MAXDWORD + 1
         SYSTEMTIME created = getDate(metaData.ftCreationTime);
         file.dateCreated.push_back(created.wMonth);
         file.dateCreated.push_back(created.wDay);
         file.dateCreated.push_back(created.wYear);
+
         SYSTEMTIME modified = getDate(metaData.ftLastWriteTime);
         file.dateModified.push_back(modified.wMonth);
         file.dateModified.push_back(modified.wDay);
         file.dateModified.push_back(modified.wYear);
+
+        char pathBuffer[MAX_PATH];
+        GetFullPathName(file.name.data(), MAX_PATH, pathBuffer, nullptr);
+        file.path = pathBuffer;
 
         return file;
     }
