@@ -8,7 +8,6 @@ using std::vector;
 #include <iostream>
 using std::cout;
 using std::endl;
-#include "retriever-win.h"
 
 namespace ufo
 {
