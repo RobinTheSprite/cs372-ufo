@@ -32,14 +32,41 @@ namespace ufo
         std::cout << "Error: " << errorMessage << std::endl;
     }
 
-vector<WIN32_FIND_DATA> retrieveWin()
-{
-    //Get the current directory
-    char currentDirectory[MAX_PATH];
-    if (GetCurrentDirectory(MAX_PATH, currentDirectory) == 0)
+    SYSTEMTIME getDate(FILETIME filetime)
     {
-        printError();
+        SYSTEMTIME systemtime;
+        char localDate[255], localTime[255];
+
+        FileTimeToLocalFileTime(&filetime, &filetime);
+        FileTimeToSystemTime(&filetime, &systemtime);
+        return systemtime;
     }
+
+    ufo::file createFile(WIN32_FIND_DATA metaData)
+    {
+        ufo::file file;
+        file.name = metaData.cFileName;
+        file.size = (metaData.nFileSizeHigh * (MAXDWORD + 1)) + metaData.nFileSizeLow;
+        SYSTEMTIME created = getDate(metaData.ftCreationTime);
+        file.dateCreated.push_back(created.wMonth);
+        file.dateCreated.push_back(created.wDay);
+        file.dateCreated.push_back(created.wYear);
+        SYSTEMTIME modified = getDate(metaData.ftLastWriteTime);
+        file.dateModified.push_back(modified.wMonth);
+        file.dateModified.push_back(modified.wDay);
+        file.dateModified.push_back(modified.wYear);
+
+        return file;
+    }
+
+    vector<ufo::file> retrieveWin()
+    {
+        //Get the current directory
+        char currentDirectory[MAX_PATH];
+        if (GetCurrentDirectory(MAX_PATH, currentDirectory) == 0)
+        {
+            printError();
+        }
 
         //Get a handle to the first file in the current directory
         WIN32_FIND_DATA foundData;
