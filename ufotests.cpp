@@ -3,6 +3,7 @@
 
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
+#include "ufo.h"
 
 // TODO:
 // Test retrieval of a vector of WIN32_FIND_DATA
@@ -11,3 +12,9 @@
 // - file size
 // - file name
 //
+
+TEST_CASE("File Retrieval")
+{
+    ufo::Ufo organizer("");
+    organizer.retrieve();
+}
