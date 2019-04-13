@@ -8,8 +8,7 @@ using std::vector;
 #include <iostream>
 using std::cout;
 using std::endl;
-#include "retriever-win.h"
-#include "file-folder.h"
+#include "ufo.h"
 
 namespace ufo
 {
@@ -20,7 +19,7 @@ namespace ufo
     {
         LPTSTR errorMessage = nullptr;
         DWORD errorCode = GetLastError();
-        FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER
+        FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER // NOLINT(hicpp-signed-bitwise)
                       | FORMAT_MESSAGE_FROM_SYSTEM
                       | FORMAT_MESSAGE_IGNORE_INSERTS,
                       nullptr,
@@ -63,7 +62,7 @@ namespace ufo
         return file;
     }
 
-    vector<ufo::file> retrieveWin()
+    vector<ufo::file> Ufo::retrieveWin()
     {
         //Get the current directory
         char currentDirectory[MAX_PATH];

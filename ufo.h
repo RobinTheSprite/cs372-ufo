@@ -12,46 +12,52 @@ using std::endl;
 using std::string;
 #include <vector>
 using std::vector;
-//#include "retriever-win.h"
 
-struct file {
-    string name;
-    string path;
-    int size;
-    vector<int> dateCreated;
-    vector<int> dateModified;
-};
+namespace ufo
+{
 
-struct folder{
-    vector<folder> folders;
-    vector<file> files;
-    string path;
-};
+    struct file
+    {
+        string name;
+        string path;
+        int size;
+        vector<int> dateCreated;
+        vector<int> dateModified;
+    };
 
-class Ufo{
-public:
-    explicit Ufo(const string &rootPath): _rootPath{rootPath}{
-        _folder.path = _rootPath;
-    }
+    struct folder
+    {
+        vector<folder> folders;
+        vector<file> files;
+        string path;
+    };
 
-    folder getfolder() const{
-        return _folder;
-    }
+    class Ufo
+    {
+    public:
+        explicit Ufo(const string &rootPath) : _rootPath{rootPath}
+        {
+            _folder.path = _rootPath;
+        }
 
-    void printError(){
-        cout << "dummy" << endl;
-    }
+        folder getfolder() const
+        {
+            return _folder;
+        }
 
-    vector<WIN32_FIND_DATA> retrieveWin(){
-        vector<WIN32_FIND_DATA> dummy;
-        return dummy;
-    }
+        void printError()
+        {
+            cout << "dummy" << endl;
+        }
+
+        vector<ufo::file> retrieveWin();
 
 
-private:
-    string _rootPath; //here root means the current root node, as in the folder we are opening, not the whole system's root directory
-    folder _folder;
-};
+    private:
+        string _rootPath; //here root means the current root node, as in the folder we are opening, not the whole system's root directory
+        folder _folder;
+    };
 
+}
 
 #endif //CS372_UFO_UFO_H
