@@ -73,7 +73,7 @@ namespace ufo
 
         //Get a handle to the first file in the current directory
         WIN32_FIND_DATA foundData;
-        HANDLE fileHandle = FindFirstFile("*", &foundData);
+        HANDLE fileHandle = FindFirstFile(std::string(_rootPath+"*").data(), &foundData);
         if (fileHandle == INVALID_HANDLE_VALUE)
         {
             printError();
