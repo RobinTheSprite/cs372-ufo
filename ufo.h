@@ -50,7 +50,7 @@ namespace ufo
             cout << "dummy" << endl;
         }
 
-        vector<ufo::file> retrieveWin();
+        vector<ufo::file> retrieve();
 
 
     private:

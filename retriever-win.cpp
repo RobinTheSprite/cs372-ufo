@@ -62,7 +62,7 @@ namespace ufo
         return file;
     }
 
-    vector<ufo::file> Ufo::retrieveWin()
+    vector<ufo::file> Ufo::retrieve()
     {
         //Get the current directory
         char currentDirectory[MAX_PATH];
