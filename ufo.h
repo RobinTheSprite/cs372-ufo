@@ -45,11 +45,6 @@ namespace ufo
             return _folder;
         }
 
-        void printError()
-        {
-            cout << "dummy" << endl;
-        }
-
         vector<ufo::file> retrieve();
 
 
