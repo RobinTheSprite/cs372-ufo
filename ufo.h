@@ -1,8 +1,11 @@
+#include <utility>
+
 // ufo.h
 // Header file for Ufo class
 
 #ifndef CS372_UFO_UFO_H
 #define CS372_UFO_UFO_H
+namespace ufo
 
 #include <Windows.h>
 #include <iostream>
@@ -30,9 +33,7 @@ struct folder{
 
 class Ufo{
 public:
-    explicit Ufo(const string &rootPath): _rootPath{rootPath}{
-        _folder.path = _rootPath;
-    }
+    explicit Ufo(string rootPath);
 
     folder getfolder() const{
         return _folder;
