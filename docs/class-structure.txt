@@ -1,2 +1,19 @@
-We don't have any class structure yet!
-WOOOOOOOOO!!!!
+
+Ufo
+    + retrieve
+        |- retrieve for windows
+        |- retrieve for mac
+    + getFolder
+
+file
+    + name
+    + path
+    + size
+    + dateModified
+    + dateCreated
+
+folder
+    + folders
+    + files
+    + path
+
