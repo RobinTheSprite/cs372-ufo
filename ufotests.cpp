@@ -13,8 +13,18 @@
 // - file name
 //
 
-TEST_CASE("File Retrieval")
-{
+TEST_CASE("File Retrieval: Empty Path") {
     ufo::Ufo organizer("");
-    organizer.retrieve();
+    auto retrievedRootFolder = organizer.retrieve();
 }
+
+// TODO:
+// fix "Error: The system cannot find the path specified." and
+// "FAILED: due to unexpected exception with message: std::bad_alloc"
+TEST_CASE("File Retrieval: with path to file")
+{
+    ufo::Ufo organizer("\\our_directory_for_testing\\license.txt");
+    auto retrievedRootFolder = organizer.retrieve();
+
+}
+
