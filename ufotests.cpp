@@ -24,7 +24,7 @@ TEST_CASE("File Retrieval: Empty Path") {
 TEST_CASE("File Retrieval: with path to file")
 {
     ufo::Ufo organizer("\\our_directory_for_testing\\license.txt");
-    auto retrievedRootFolder = organizer.retrieve();
+    auto retrievedFile = organizer.retrieve();
 
 }
 
