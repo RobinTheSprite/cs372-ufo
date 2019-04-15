@@ -1,0 +1,17 @@
+Unmodified version of the GPL-covered program is distributed in accordance to 'mere aggregation' terms of the license, and only for user's convenience. The full source code of the program is available at:
+https://gcc.gnu.org/libstdc++
+https://gcc.gnu.org/svn/gcc/trunk/libstdc++-v3/python/libstdcxx/
+
+
+Extract from FAQ about GNU licenses:
+—
+What is the difference between an “aggregate” and other kinds of “modified versions”?
+http://www.gnu.org/licenses/gpl-faq.html#MereAggregation
+
+An “aggregate” consists of a number of separate programs, distributed together on the same CD-ROM or other media. The GPL permits you to create and distribute an aggregate, even when the licenses of the other software are non-free or GPL-incompatible. The only condition is that you cannot release the aggregate under a license that prohibits users from exercising rights that each program's individual license would grant them.
+
+Where's the line between two separate programs, and one program with two parts? This is a legal question, which ultimately judges will decide. We believe that a proper criterion depends both on the mechanism of communication (exec, pipes, rpc, function calls within a shared address space, etc.) and the semantics of the communication (what kinds of information are interchanged).
+
+If the modules are included in the same executable file, they are definitely combined in one program. If modules are designed to run linked together in a shared address space, that almost surely means combining them into one program.
+
+By contrast, pipes, sockets and command-line arguments are communication mechanisms normally used between two separate programs. So when they are used for communication, the modules normally are separate programs. But if the semantics of the communication are intimate enough, exchanging complex internal data structures, that too could be a basis to consider the two parts as combined into a larger program.
