@@ -23,7 +23,7 @@ TEST_CASE("File Retrieval: Empty Path") {
 // "FAILED: due to unexpected exception with message: std::bad_alloc"
 TEST_CASE("File Retrieval: with path to file")
 {
-    ufo::Ufo organizer("\\our_directory_for_testing\\license.txt");
+    ufo::Ufo organizer("C:\\Users\\AlexL\\Documents\\UAF Classes\\Software Construction\\cs372-ufo\\our_directory_for_testing\\license.txt");
     auto retrievedFile = organizer.retrieve();
 
 }
