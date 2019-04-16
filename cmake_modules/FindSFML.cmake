@@ -71,8 +71,7 @@ set(FIND_SFML_PATHS
     /sw
     /opt/local
     /opt/csw
-    /opt
-	C:/Users/Mark/Documents/SFML/SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit/SFML-2.5.1)
+    /opt)
 
 # find the SFML include directory
 find_path(SFML_INCLUDE_DIR SFML/Config.hpp
