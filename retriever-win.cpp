@@ -65,13 +65,6 @@ namespace ufo
 
     vector<ufo::file> Ufo::retrieve()
     {
-        //Get the current directory
-        char currentDirectory[MAX_PATH];
-        if (GetCurrentDirectory(MAX_PATH, currentDirectory) == 0)
-        {
-            printError();
-        }
-
         //Get a handle to the first file in the current directory
         WIN32_FIND_DATA foundData;
         HANDLE fileHandle = FindFirstFile(std::string(_rootPath+"*").data(), &foundData);
@@ -87,6 +80,10 @@ namespace ufo
             {
                 ufo::file file = createFile(foundData);
                 fileMetadata.push_back(file);
+            }
+            else
+            {
+
             }
 
             FindNextFile(fileHandle, &foundData);
