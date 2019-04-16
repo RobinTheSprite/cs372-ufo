@@ -63,6 +63,36 @@ namespace ufo
         return file;
     }
 
+    vector<ufo::file> retrieve_recurse(const string& filepath)
+    {
+        //Get a handle to the first file in the current directory
+        WIN32_FIND_DATA foundData;
+        HANDLE fileHandle = FindFirstFile(std::string(filepath+"*").data(), &foundData);
+        if (fileHandle == INVALID_HANDLE_VALUE)
+        {
+            printError();
+        }
+
+        vector<ufo::file> fileMetadata;
+        do
+        {
+            if (foundData.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY)
+            {
+                ufo::file file = createFile(foundData);
+                fileMetadata.push_back(file);
+            }
+            else
+            {
+                auto subfolderMetaData = retrieve_recurse(foundData.cFileName);
+                fileMetadata.insert(fileMetadata.end(), subfolderMetaData.begin(), subfolderMetaData.end());
+            }
+
+            FindNextFile(fileHandle, &foundData);
+        } while (GetLastError() != ERROR_NO_MORE_FILES);
+
+        return fileMetadata;
+    }
+
     vector<ufo::file> Ufo::retrieve()
     {
         //Get a handle to the first file in the current directory
