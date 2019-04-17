@@ -63,18 +63,17 @@ namespace ufo
         return file;
     }
 
-    vector<ufo::file> Ufo::retrieve()
+    vector<ufo::file> retrieve_recurse(string filepath)
     {
-        //Get the current directory
-        char currentDirectory[MAX_PATH];
-        if (GetCurrentDirectory(MAX_PATH, currentDirectory) == 0)
-        {
-            printError();
-        }
-
         //Get a handle to the first file in the current directory
         WIN32_FIND_DATA foundData;
-        HANDLE fileHandle = FindFirstFile(std::string(_rootPath+"*").data(), &foundData);
+        if (filepath.empty())
+        {
+            filepath = ".";
+        }
+
+        string fileSelector = filepath + "/*";
+        HANDLE fileHandle = FindFirstFile(fileSelector.data(), &foundData);
         if (fileHandle == INVALID_HANDLE_VALUE)
         {
             printError();
@@ -88,11 +87,22 @@ namespace ufo
                 ufo::file file = createFile(foundData);
                 fileMetadata.push_back(file);
             }
+            else if (strcmp(foundData.cFileName, ".") != 0 && strcmp(foundData.cFileName, "..") != 0)
+            {
+                auto subfolderMetaData = retrieve_recurse(filepath + "/" + foundData.cFileName);
+                fileMetadata.insert(fileMetadata.end(), subfolderMetaData.begin(), subfolderMetaData.end());
+            }
 
             FindNextFile(fileHandle, &foundData);
         } while (GetLastError() != ERROR_NO_MORE_FILES);
 
+        SetLastError(0);
         return fileMetadata;
+    }
+
+    vector<ufo::file> Ufo::retrieve()
+    {
+        return retrieve_recurse(_rootPath);
     }
 
 }
