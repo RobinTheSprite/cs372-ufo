@@ -67,16 +67,23 @@ namespace ufo
     {
         //Get a handle to the first file in the current directory
         WIN32_FIND_DATA foundData;
+
         if (filepath.empty())
         {
             filepath = ".";
         }
 
-        string fileSelector = filepath + "/*";
+        if (filepath.back() != '/' && filepath.back() != '\\')
+        {
+            filepath.push_back('/');
+        }
+
+        string fileSelector = filepath + "*";
         HANDLE fileHandle = FindFirstFile(fileSelector.data(), &foundData);
         if (fileHandle == INVALID_HANDLE_VALUE)
         {
             printError();
+            return {};
         }
 
         vector<ufo::file> fileMetadata;
@@ -89,7 +96,7 @@ namespace ufo
             }
             else if (strcmp(foundData.cFileName, ".") != 0 && strcmp(foundData.cFileName, "..") != 0)
             {
-                auto subfolderMetaData = retrieve_recurse(filepath + "/" + foundData.cFileName);
+                auto subfolderMetaData = retrieve_recurse(filepath + foundData.cFileName);
                 fileMetadata.insert(fileMetadata.end(), subfolderMetaData.begin(), subfolderMetaData.end());
             }
 
