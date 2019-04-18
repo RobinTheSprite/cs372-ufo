@@ -16,7 +16,7 @@ namespace ufo
     {
         string name;
         string path;
-        int size;
+        unsigned long size;
         vector<int> dateCreated;
         vector<int> dateModified;
     };
