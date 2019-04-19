@@ -16,7 +16,7 @@ namespace ufo
     {
         string name;
         string path;
-        int size;
+        unsigned long size;
         vector<int> dateCreated;
         vector<int> dateModified;
     };
@@ -28,4 +28,5 @@ namespace ufo
         string path;
     };
 }
-#endif //CS372_UFO_FILE_FOLDER_H
+
+#endif CS372_UFO_FILE_FOLDER_H

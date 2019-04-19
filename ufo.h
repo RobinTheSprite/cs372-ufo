@@ -1,10 +1,11 @@
+#include <utility>
+
 // ufo.h
 // Header file for Ufo class
 
 #ifndef CS372_UFO_UFO_H
 #define CS372_UFO_UFO_H
 
-#include <Windows.h>
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -16,36 +17,29 @@ using std::vector;
 namespace ufo
 {
 
-    struct file
-    {
+    struct file {
         string name;
         string path;
-        int size;
+        unsigned long size;
         vector<int> dateCreated;
         vector<int> dateModified;
     };
 
-    struct folder
-    {
+    struct folder {
         vector<folder> folders;
         vector<file> files;
         string path;
     };
 
-    class Ufo
-    {
+    class Ufo{
     public:
-        explicit Ufo(const string &rootPath) : _rootPath{rootPath}
-        {
-            _folder.path = _rootPath;
-        }
+        explicit Ufo(string rootPath);
 
-        folder getfolder() const
-        {
-            return _folder;
-        }
+    folder getfolder() const{
+        return _folder;
+    }
 
-        vector<ufo::file> retrieve();
+    vector<ufo::file> retrieve();
 
 
     private:
@@ -54,5 +48,4 @@ namespace ufo
     };
 
 }
-
 #endif //CS372_UFO_UFO_H
