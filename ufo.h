@@ -33,6 +33,7 @@ namespace ufo
 
     class Ufo{
     public:
+        Ufo();
         explicit Ufo(string rootPath);
 
     folder getfolder() const{

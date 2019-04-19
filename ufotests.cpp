@@ -15,7 +15,7 @@
 //
 
 TEST_CASE("File Retrieval: Empty Path") {
-    ufo::Ufo organizer(".");
+    ufo::Ufo organizer;
     auto retrievedRootFolder = organizer.retrieve();
 
     REQUIRE(retrievedRootFolder[0].name == "CMakeCache.txt");

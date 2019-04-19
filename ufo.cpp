@@ -5,6 +5,9 @@
 
 namespace ufo
 {
+    Ufo::Ufo() : _rootPath{"."}
+    {}
+
     Ufo::Ufo(string rootPath) : _rootPath{std::move(rootPath)}
     {
         _folder.path = _rootPath;
