@@ -29,4 +29,45 @@ namespace ufo
             }
         }
     }
+
+    std::string Component::getName() const
+    {
+        return _name;
+    }
+
+    int File::getSize() const
+    {
+        return _size;
+    }
+
+    int Folder::getSize() const
+    {
+        int total = 0;
+        for(const auto &c :_children)
+            total += c->getSize();
+        return total;
+    }
+
+    void Folder::add(std::unique_ptr<Component> child)
+    {
+        _children.push_back(move(child));
+    }
+
+    void Folder::remove(const string& name)
+    {
+        for(auto i = _children.begin(); i != _children.end(); ++i)
+        {
+            if ((*i)->getName() == name){
+                _children.erase(i);
+                return;
+            }
+        }
+    }
+
+    const Folder::ChildContainer &Folder::getChildren() const
+    {
+        return _children;
+    }
+
+
 }
