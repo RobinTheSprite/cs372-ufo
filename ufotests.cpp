@@ -35,3 +35,15 @@ TEST_CASE("File Retrieval: with path to file")
     auto dateModified = retrievedFolder[0].dateModified;
     REQUIRE( retrievedFolder[0].path.rfind(R"(\our_directory_for_testing\aura2_blue.png)") != string::npos );
 }
+
+TEST_CASE("Sorting")
+{
+    ufo::Ufo organizer(
+            R"(..\our_directory_for_testing\)");
+
+    SECTION("Sorting by file extension")
+    {
+        organizer.retrieve();
+        organizer.sortFolder("extension");
+    }
+}
