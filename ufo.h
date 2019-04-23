@@ -35,11 +35,13 @@ namespace ufo
     public:
         explicit Ufo(string rootPath);
 
-    folder getfolder() const{
-        return _folder;
-    }
+        folder getfolder() const{
+            return _folder;
+        }
 
-    vector<ufo::file> retrieve();
+        void sortFolder();
+
+        vector<ufo::file> retrieve();
 
 
     private:
