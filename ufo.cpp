@@ -12,4 +12,9 @@ namespace ufo
     {
         _folder.path = _rootPath;
     }
+
+    void Ufo::sortFolder()
+    {
+
+    }
 }
