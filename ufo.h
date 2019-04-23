@@ -39,7 +39,7 @@ namespace ufo
             return _folder;
         }
 
-        void sortFolder();
+        void sortFolder(const string& sortType);
 
         vector<ufo::file> retrieve();
 
