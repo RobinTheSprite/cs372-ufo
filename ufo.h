@@ -51,6 +51,7 @@ namespace ufo
         unsigned long size;
         vector<int> dateCreated;
         vector<int> dateModified;
+        File& operator=(const File& rhs);
     private:
         int _size;
     };
@@ -79,7 +80,7 @@ namespace ufo
 
         void sortFolder(const string& sortType);
 
-        vector<ufo::file> retrieve();
+        vector<File> retrieve();
 
 
     private:

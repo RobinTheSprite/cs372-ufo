@@ -13,7 +13,6 @@ using std::endl;
 
 namespace ufo
 {
-
     //printError
     //Tell me what the last error in this thread was
     void printError()
@@ -40,9 +39,9 @@ namespace ufo
         return systemtime;
     }
 
-    ufo::file createFile(WIN32_FIND_DATA metaData)
+    File createFile(WIN32_FIND_DATA metaData)
     {
-        ufo::file file;
+        File file;
         file.name = metaData.cFileName;
         file.size = (metaData.nFileSizeHigh * MAXDWORD) + metaData.nFileSizeLow; //MAXDWORD might need to be
         //MAXDWORD + 1
@@ -63,7 +62,7 @@ namespace ufo
         return file;
     }
 
-    vector<ufo::file> retrieve_recurse(string filepath)
+    vector<File> retrieve_recurse(string filepath)
     {
         //Get a handle to the first file in the current directory
         WIN32_FIND_DATA foundData;
@@ -86,12 +85,12 @@ namespace ufo
             return {};
         }
 
-        vector<ufo::file> fileMetadata;
+        vector<File> fileMetadata;
         do
         {
             if (foundData.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY)
             {
-                ufo::file file = createFile(foundData);
+                File file = createFile(foundData);
                 fileMetadata.push_back(file);
             }
             else if (strcmp(foundData.cFileName, ".") != 0 && strcmp(foundData.cFileName, "..") != 0)
@@ -107,7 +106,7 @@ namespace ufo
         return fileMetadata;
     }
 
-    vector<ufo::file> Ufo::retrieve()
+    vector<File> Ufo::retrieve()
     {
         if (!SetCurrentDirectory(_rootPath.data()))
         {

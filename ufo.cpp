@@ -23,6 +23,17 @@ namespace ufo
         return _size;
     }
 
+    File& File::operator=(const File &rhs)
+    {
+        this->size = rhs.size;
+        this->name = rhs.name;
+        this->path = rhs.path;
+        this->dateModified = rhs.dateModified;
+        this->dateCreated = rhs.dateCreated;
+
+        return *this;
+    }
+
     int Folder::getSize() const
     {
         int total = 0;
