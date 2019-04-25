@@ -26,6 +26,7 @@ namespace ufo
     };
 
     struct folder {
+        string name;
         vector<folder> folders;
         vector<file> files;
         string path;
