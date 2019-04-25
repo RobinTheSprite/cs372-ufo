@@ -16,7 +16,6 @@ using std::vector;
 
 namespace ufo
 {
-
     struct file {
         string name;
         string path;
@@ -30,43 +29,6 @@ namespace ufo
         vector<folder> folders;
         vector<file> files;
         string path;
-    };
-
-    class Component
-    {
-    public:
-        virtual ~Component() = default;
-        virtual int getSize() const=0;
-        std::string getName() const;
-        const string path;
-    private:
-        const std::string _name;
-    };
-
-    class File : public Component
-    {
-    public:
-        int getSize() const override;
-        string name;
-        string path;
-        unsigned long size;
-        vector<int> dateCreated;
-        vector<int> dateModified;
-    private:
-        int _size;
-    };
-
-    class Folder : public Component
-    {
-    public:
-        using Component::Component;
-        using ChildContainer = std::vector<std::unique_ptr<Component>>;
-        int getSize() const override;
-        void add(std::unique_ptr<Component>);
-        void remove(const string& name);
-        const ChildContainer & getChildren() const;
-    private:
-        ChildContainer _children;
     };
 
     class Ufo{
