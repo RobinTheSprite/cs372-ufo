@@ -60,7 +60,7 @@ int main() {
         string rootpath;
         getline(cin, rootpath);
 
-        ufo::Ufo organizer();
+        ufo::Ufo organizer(rootpath);
 
         // if file path cannot be opened...
         if (rootpath == "") {
@@ -80,11 +80,6 @@ int main() {
         for(auto i: retrievedFolder){
             cout << i.name << endl;
         }
-
-
-
-
-
     }
 
     return 0;
