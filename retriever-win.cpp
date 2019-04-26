@@ -87,6 +87,7 @@ namespace ufo
         }
 
         vector<ufo::file> fileMetadata;
+        DWORD test;
         do
         {
             if (foundData.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY)
@@ -109,11 +110,11 @@ namespace ufo
 
     vector<ufo::file> Ufo::retrieve()
     {
-        if (!SetCurrentDirectory(_rootPath.data()))
-        {
-            printError();
-            return {};
-        }
+//        if (!SetCurrentDirectory(_rootPath.data()))
+//        {
+//            printError();
+//            return {};
+//        }
 
         return retrieve_recurse(_rootPath);
     }
