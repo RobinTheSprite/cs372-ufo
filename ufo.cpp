@@ -47,4 +47,9 @@ namespace ufo
             }
         }
     }
+
+    bool Ufo::empty()
+    {
+        return _folder.empty();
+    }
 }

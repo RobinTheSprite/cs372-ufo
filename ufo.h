@@ -29,6 +29,10 @@ namespace ufo
         vector<folder> folders;
         vector<file> files;
         string path;
+        bool empty()
+        {
+            return folders.empty() && files.empty();
+        }
     };
 
     class Ufo{
@@ -43,6 +47,8 @@ namespace ufo
         void sortFolder(const string& sortType);
 
         vector<ufo::file> retrieve();
+
+        bool empty();
 
     private:
 

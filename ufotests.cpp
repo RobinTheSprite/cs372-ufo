@@ -47,6 +47,6 @@ TEST_CASE("Sorting")
         organizer.retrieve();
         organizer.sortFolder("extension");
 
-        REQUIRE(!organizer.getfolder().folders.empty());
+        REQUIRE(!organizer.empty());
     }
 }
