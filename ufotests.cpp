@@ -22,7 +22,7 @@ TEST_CASE("File Retrieval: Empty Path") {
     REQUIRE(retrievedRootFolder[0].path.rfind(R"(\cmake-build-debug\CMakeCache.txt)") != string::npos);
 }
 
-// TODO: crashes when accessing a retrieved file's data members: "Process finished with exit code -1073741819 (0xC0000005)"
+
 TEST_CASE("File Retrieval: with path to file")
 {
     ufo::Ufo organizer(
@@ -36,6 +36,7 @@ TEST_CASE("File Retrieval: with path to file")
     REQUIRE( retrievedFolder[0].path.rfind(R"(\our_directory_for_testing\aura2_blue.png)") != string::npos );
 }
 
+
 TEST_CASE("Sorting")
 {
     ufo::Ufo organizer(
@@ -45,5 +46,7 @@ TEST_CASE("Sorting")
     {
         organizer.retrieve();
         organizer.sortFolder("extension");
+
+        REQUIRE(!organizer.getfolder().folders.empty());
     }
 }

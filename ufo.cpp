@@ -2,6 +2,7 @@
 // Source file for Ufo class.
 
 #include "ufo.h"
+#include <algorithm>
 
 namespace ufo
 {
@@ -25,7 +26,24 @@ namespace ufo
         {
             for (const auto& f : retrievedFiles)
             {
-                //TODO place the file f into the correct file extension folder.
+                string extension = getFileExtension(f.name);
+
+                auto correctFolder = std::find_if(_folder.folders.begin(), _folder.folders.end(),
+                                                  [extension](auto a){return a.name == extension;});
+
+                //Is there a folder for that file extension already?
+                if (correctFolder != _folder.folders.end())
+                {
+                    correctFolder->files.push_back(f);
+                }
+                else
+                {
+                    folder newFolder;
+                    newFolder.name = extension;
+                    newFolder.files.push_back(f);
+
+                    _folder.folders.push_back(newFolder);
+                }
             }
         }
     }

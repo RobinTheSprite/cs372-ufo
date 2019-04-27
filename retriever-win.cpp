@@ -45,7 +45,7 @@ namespace ufo
         ufo::file file;
         file.name = metaData.cFileName;
         file.size = (metaData.nFileSizeHigh * MAXDWORD) + metaData.nFileSizeLow; //MAXDWORD might need to be
-        //MAXDWORD + 1
+                                                                                 //MAXDWORD + 1
         SYSTEMTIME created = getDate(metaData.ftCreationTime);
         file.dateCreated.push_back(created.wMonth);
         file.dateCreated.push_back(created.wDay);

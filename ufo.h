@@ -16,7 +16,6 @@ using std::vector;
 
 namespace ufo
 {
-
     struct file {
         string name;
         string path;
@@ -26,6 +25,7 @@ namespace ufo
     };
 
     struct folder {
+        string name;
         vector<folder> folders;
         vector<file> files;
         string path;
@@ -44,8 +44,8 @@ namespace ufo
 
         vector<ufo::file> retrieve();
 
-
     private:
+
         string _rootPath; //here root means the current root node, as in the folder we are opening, not the whole system's root directory
         folder _folder;
     };
