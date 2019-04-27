@@ -34,15 +34,15 @@ namespace ufo
                 //Is there a folder for that file extension already?
                 if (correctFolder != _folder.folders.end())
                 {
-                    correctFolder->files.push_back(f);
+                    correctFolder->push_file(f);
                 }
                 else
                 {
                     folder newFolder;
                     newFolder.name = extension;
-                    newFolder.files.push_back(f);
+                    newFolder.push_file(f);
 
-                    _folder.folders.push_back(newFolder);
+                    _folder.push_folder(newFolder);
                 }
             }
         }
