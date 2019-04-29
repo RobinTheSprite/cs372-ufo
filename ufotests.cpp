@@ -50,3 +50,13 @@ TEST_CASE("Sorting")
         REQUIRE(!organizer.empty());
     }
 }
+
+TEST_CASE("Opening a file")
+{
+    ufo::Ufo organizer(
+            R"(..\our_directory_for_testing\)");
+
+    organizer.sortFolder("extension");
+
+    organizer.openFile(organizer.getfolder().folders[0].files[1]);
+}

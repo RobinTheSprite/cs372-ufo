@@ -59,7 +59,7 @@ namespace ufo
 
         vector<file> retrieve();
 
-        void open();
+        void openFile(const file&);
 
         bool empty();
 
