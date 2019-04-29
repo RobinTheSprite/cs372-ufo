@@ -59,6 +59,8 @@ namespace ufo
 
         vector<file> retrieve();
 
+        void open();
+
         bool empty();
 
     private:
