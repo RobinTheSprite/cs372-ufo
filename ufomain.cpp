@@ -63,7 +63,7 @@ int main() {
         ufo::Ufo organizer(rootpath);
 
         // if file path cannot be opened...
-        if (rootpath == "") {
+        if (rootpath.empty()) {
             cout << "*****************************************" << endl;
             cout << "ERROR: Please enter a valid file / folder path directory." << endl;
             cout << "*****************************************" << endl;
