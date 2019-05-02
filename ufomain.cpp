@@ -75,10 +75,21 @@ int main() {
         cout << "file was opened successfully! How would you like to sort the files? " << endl;
         cout << "*****************************************" << endl;
 
+        string organizationPreference;
+        getline(cin, organizationPreference);
+
         cout << "Organizing files..." << endl;
-        auto retrievedFolder = organizer.retrieve();
-        for(auto i: retrievedFolder){
-            cout << i.name << endl;
+        organizer.sortFolder(organizationPreference);
+
+        for (const auto &folder : organizer.getfolder().folders)
+        {
+            cout << "Folder: " << folder.name << endl;
+            cout << endl;
+            for (const auto &file : folder.files)
+            {
+                cout << file.name << endl;
+            }
+            cout << endl;
         }
     }
 
