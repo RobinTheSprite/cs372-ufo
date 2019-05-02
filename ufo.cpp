@@ -69,9 +69,13 @@ namespace ufo
                 }
             }
         }
+        else
+        {
+            cout << "Error: Not a valid organization method" << endl;
+        }
     }
 
-    bool Ufo::empty()
+    bool Ufo::isEmpty()
     {
         return _folder.empty();
     }

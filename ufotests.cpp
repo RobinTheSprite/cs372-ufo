@@ -47,7 +47,7 @@ TEST_CASE("Sorting")
         organizer.retrieve();
         organizer.sortFolder("extension");
 
-        REQUIRE(!organizer.empty());
+        REQUIRE(!organizer.isEmpty());
     }
 }
 

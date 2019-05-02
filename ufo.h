@@ -61,7 +61,7 @@ namespace ufo
 
         void openFile(const file&);
 
-        bool empty();
+        bool isEmpty();
 
     private:
 
