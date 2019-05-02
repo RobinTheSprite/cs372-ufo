@@ -46,6 +46,29 @@ namespace ufo
                 }
             }
         }
+        else if (sortType == "name")
+        {
+            for (const auto& f : retrievedFiles)
+            {
+                string name = f.name;
+
+                auto correctFolder = std::find_if(_folder.folders.begin(), _folder.folders.end(),
+                                                  [name](auto folder){return folder.name.front() == name.front() ;});
+
+                //Is there a folder for that file extension already?
+                if (correctFolder != _folder.folders.end())
+                {
+                    correctFolder->files.push_back(f);
+                }
+                else
+                {
+                    folder newFolder;
+                    newFolder.name = f.name.front();
+                    newFolder.files.push_back(f);
+                    _folder.folders.push_back(newFolder);
+                }
+            }
+        }
     }
 
     bool Ufo::empty()

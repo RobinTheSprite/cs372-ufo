@@ -39,9 +39,9 @@ namespace ufo
         return systemtime;
     }
 
-    file createFile(WIN32_FIND_DATA metaData)
+    ufo::file createFile(WIN32_FIND_DATA metaData)
     {
-        file file;
+        ufo::file file;
         file.name = metaData.cFileName;
         file.size = (metaData.nFileSizeHigh * MAXDWORD) + metaData.nFileSizeLow; //MAXDWORD might need to be
                                                                                  //MAXDWORD + 1
@@ -62,7 +62,7 @@ namespace ufo
         return file;
     }
 
-    vector<file> retrieve_recurse(string filepath)
+    vector<ufo::file> retrieve_recurse(string filepath)
     {
         //Get a handle to the first file in the current directory
         WIN32_FIND_DATA foundData;
@@ -85,12 +85,12 @@ namespace ufo
             return {};
         }
 
-        vector<file> fileMetadata;
+        vector<ufo::file> fileMetadata;
         do
         {
             if (foundData.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY)
             {
-                file file = createFile(foundData);
+                ufo::file file = createFile(foundData);
                 fileMetadata.push_back(file);
             }
             else if (strcmp(foundData.cFileName, ".") != 0 && strcmp(foundData.cFileName, "..") != 0)
@@ -106,7 +106,7 @@ namespace ufo
         return fileMetadata;
     }
 
-    vector<file> Ufo::retrieve()
+    vector<ufo::file> Ufo::retrieve()
     {
         if (!SetCurrentDirectory(_rootPath.data()))
         {
