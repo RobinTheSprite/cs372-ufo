@@ -21,17 +21,17 @@ int main() {
         cout << "Please choose a file / folder path directory [ENTER to quit]: ";
 
         string rootpath;
-        cin >> rootpath;
-        //getline(cin, rootpath);
-
-        ufo::Ufo organizer(rootpath);
-
-        if (rootpath.empty()){
+        if (cin.get() == '\n'){
             cout << "*****************************************" << endl;
             cout << "Okay, Good bye! :)" << endl;
             cout << "*****************************************" << endl;
             break;
         }
+        cin >> rootpath;
+        //getline(cin, rootpath);
+
+
+        ufo::Ufo organizer(rootpath);
 
         // if file path cannot be opened...
         if (rootpath == "") {
