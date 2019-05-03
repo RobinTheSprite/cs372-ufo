@@ -1,3 +1,4 @@
+
 // ufo.cpp
 // Source file for Ufo class.
 
@@ -10,36 +11,36 @@ void BoxPrint(int num, string message){
 
     for(int i = 0; i <= c; i++){
         for(int i = 0; i <= 2*c + x + 2; i ++)
-            cout << "@";
-        cout << "@" << endl;
+            cout << "*";
+        cout << "*" << endl;
     }
 
     for(int a = 0; a <= 2; a++){
+
         if(a == 1){
             for(int i = 0; i <= c; i++)
-                cout << "@";
+                cout << "*";
             cout << " ";
             cout << message << " ";
             for(int i = 0; i < c; i++)
-                cout << "@";
+                cout << "*";
         }
 
         if(a == 0 || a == 2) {
             for(int i = 0; i <= c; i++)
-                cout << "@";
+                cout << "*";
             for(int i = 0; i < x + 2; i++)
                 cout << " ";
             for(int i = 0; i < c; i++)
-                cout << "@";
+                cout << "*";
         }
-
-        cout << "@" << endl;
+        cout << "*" << endl;
     }
 
     for(int i = 0; i <= c; i++){
         for(int i = 0; i <= 2*c + x + 2; i ++)
-            cout << "@";
-        cout << "@" << endl;
+            cout << "*";
+        cout << "*" << endl;
     }
 }
 
@@ -85,9 +86,36 @@ namespace ufo
                 }
             }
         }
+        else if (sortType == "name")
+        {
+            for (const auto& f : retrievedFiles)
+            {
+                string name = f.name;
+
+                auto correctFolder = std::find_if(_folder.folders.begin(), _folder.folders.end(),
+                                                  [name](auto folder){return folder.name.front() == name.front() ;});
+
+                //Is there a folder for that file extension already?
+                if (correctFolder != _folder.folders.end())
+                {
+                    correctFolder->files.push_back(f);
+                }
+                else
+                {
+                    folder newFolder;
+                    newFolder.name = f.name.front();
+                    newFolder.files.push_back(f);
+                    _folder.folders.push_back(newFolder);
+                }
+            }
+        }
+        else
+        {
+            cout << "Error: Not a valid organization method" << endl;
+        }
     }
 
-    bool Ufo::empty()
+    bool Ufo::isEmpty()
     {
         return _folder.empty();
     }
