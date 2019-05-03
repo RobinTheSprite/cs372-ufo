@@ -14,6 +14,8 @@ using std::string;
 #include <vector>
 using std::vector;
 
+void BoxPrint(int num, string message);
+
 namespace ufo
 {
     struct file {

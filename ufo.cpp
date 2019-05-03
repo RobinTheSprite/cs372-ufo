@@ -1,8 +1,48 @@
+
 // ufo.cpp
 // Source file for Ufo class.
 
 #include "ufo.h"
 #include <algorithm>
+
+void BoxPrint(int num, string message){
+    int c = num - 1;
+    int x = message.size();
+
+    for(int i = 0; i <= c; i++){
+        for(int i = 0; i <= 2*c + x + 2; i ++)
+            cout << "*";
+        cout << "*" << endl;
+    }
+
+    for(int a = 0; a <= 2; a++){
+
+        if(a == 1){
+            for(int i = 0; i <= c; i++)
+                cout << "*";
+            cout << " ";
+            cout << message << " ";
+            for(int i = 0; i < c; i++)
+                cout << "*";
+        }
+
+        if(a == 0 || a == 2) {
+            for(int i = 0; i <= c; i++)
+                cout << "*";
+            for(int i = 0; i < x + 2; i++)
+                cout << " ";
+            for(int i = 0; i < c; i++)
+                cout << "*";
+        }
+        cout << "*" << endl;
+    }
+
+    for(int i = 0; i <= c; i++){
+        for(int i = 0; i <= 2*c + x + 2; i ++)
+            cout << "*";
+        cout << "*" << endl;
+    }
+}
 
 namespace ufo
 {
