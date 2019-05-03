@@ -56,7 +56,15 @@ namespace ufo
 
     string getFileExtension(const string& filename)
     {
-        return filename.substr(filename.rfind('.'), string::npos);
+         size_t extensionPosition = filename.rfind('.');
+         if (extensionPosition != string::npos)
+         {
+            return filename.substr(extensionPosition, string::npos);
+         }
+         else
+         {
+             return " none";
+         }
     }
 
     void Ufo::sortFolder(const string& sortType)
