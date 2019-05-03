@@ -11,56 +11,27 @@ using std::endl;
 using std::string;
 using ufo::Ufo;
 
-void BoxPrint(int num, string message){
-    int c = num - 1;
-    int x = message.size();
-
-    for(int i = 0; i <= c; i++){
-        for(int i = 0; i <= 2*c + x + 2; i ++)
-            cout << "@";
-        cout << "@" << endl;
-    }
-
-    for(int a = 0; a <= 2; a++){
-        if(a == 1){
-            for(int i = 0; i <= c; i++)
-                cout << "@";
-            cout << " ";
-            cout << message << " ";
-            for(int i = 0; i < c; i++)
-                cout << "@";
-        }
-
-        if(a == 0 || a == 2) {
-            for(int i = 0; i <= c; i++)
-                cout << "@";
-            for(int i = 0; i < x + 2; i++)
-                cout << " ";
-            for(int i = 0; i < c; i++)
-                cout << "@";
-        }
-
-        cout << "@" << endl;
-    }
-
-    for(int i = 0; i <= c; i++){
-        for(int i = 0; i <= 2*c + x + 2; i ++)
-            cout << "@";
-        cout << "@" << endl;
-    }
-}
+// Test folder: ..\our_directory_for_testing\ //
 
 int main() {
     BoxPrint(3, "Welcome to UFO!");
 
     while(true) {
         cout << endl;
-        cout << "Please choose a file / folder path directory [enter to quit]: ";
+        cout << "Please choose a file / folder path directory [ENTER to quit]: ";
 
         string rootpath;
-        getline(cin, rootpath);
+        cin >> rootpath;
+        //getline(cin, rootpath);
 
         ufo::Ufo organizer(rootpath);
+
+        if (rootpath.empty()){
+            cout << "*****************************************" << endl;
+            cout << "Okay, Good bye! :)" << endl;
+            cout << "*****************************************" << endl;
+            break;
+        }
 
         // if file path cannot be opened...
         if (rootpath == "") {
@@ -75,11 +46,72 @@ int main() {
         cout << "file was opened successfully! How would you like to sort the files? " << endl;
         cout << "*****************************************" << endl;
 
-        cout << "Organizing files..." << endl;
-        auto retrievedFolder = organizer.retrieve();
-        for(auto i: retrievedFolder){
-            cout << i.name << endl;
+        cout << "\t [1] file extension" << endl;
+        cout << "\t [2] date modified" << endl;
+        cout << "\t [3] file size" << endl;
+
+
+        int choice;
+        cin >> choice;
+        switch (choice)
+        {
+            case 1:
+                cout << "Organizing files..." << endl << endl;
+                organizer.sortFolder("extension");
+                break;
+            case 2:
+                cout << "This feature hasn't been implemented yet" << endl;
+                continue;
+            case 3:
+                cout << "This feature hasn't been implemented yet" << endl;
+                continue;
+            default:
+                cout << "ERROR: Please choose choice from "
+                        "1-3" << endl;
+                continue;
         }
+
+        cout << "*****************************************" << endl;
+        cout << "UFO has sorted the files in the following extensions: " << endl;
+        cout << "*****************************************" << endl;
+
+        ufo::folder sortedFolders  = organizer.getfolder();
+
+        for(auto i = 0; i < sortedFolders.folders.size(); ++i){
+            cout << "\t [" << i+1 << "]" + sortedFolders.folders[i].name << endl;
+        }
+
+        cout << "*****************************************" << endl;
+        cout << "Which file extension were you looking for? (Enter a number from the list above) " << endl;
+
+        int x;
+        cin >> x;
+
+        ufo::folder currFolder = sortedFolders.folders[x-1];
+        cout << "*****************************************" << endl;
+        cout << "Opening all " << currFolder.name;
+        cout << " files: " << endl;
+        cout << "*****************************************" << endl;
+
+        int counter = 0;
+        for(auto i : currFolder.files){
+            counter ++;
+            cout << "[" << counter << "]" << i.name << endl;
+        }
+
+        cout << "*****************************************" << endl;
+        cout << "Which file path were you looking for? (Enter a number from the list above) " << endl;
+
+        int fileNumber;
+        cin >> fileNumber;
+
+        cout << "*****************************************" << endl;
+        cout << "Here you go: " << endl;
+        cout << currFolder.files[fileNumber-1].path << endl;
+        cout << "*****************************************\n" << endl;
+
+        cout << "*****************************************" << endl;
+        cout << "*****************************************" << endl;
     }
 
     return 0;

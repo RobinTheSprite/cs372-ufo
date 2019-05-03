@@ -14,6 +14,8 @@ using std::string;
 #include <vector>
 using std::vector;
 
+void BoxPrint(int num, string message);
+
 namespace ufo
 {
     struct file {
@@ -29,21 +31,6 @@ namespace ufo
         vector<folder> folders;
         vector<file> files;
         string path;
-
-        bool empty()
-        {
-            return folders.empty() && files.empty();
-        }
-
-        void push_file(const file& f)
-        {
-            files.push_back(f);
-        }
-
-        void push_folder(const folder& f)
-        {
-            folders.push_back(f);
-        }
     };
 
     class Ufo{
@@ -57,11 +44,7 @@ namespace ufo
 
         void sortFolder(const string& sortType);
 
-        vector<file> retrieve();
-
-        void openFile(const file&);
-
-        bool empty();
+        vector<ufo::file> retrieve();
 
     private:
 

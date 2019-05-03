@@ -2,7 +2,8 @@
 // Created by Mark on 4/9/2019.
 //
 
-#include <Windows.h>
+#define WINVER 0x0500
+#include <windows.h>
 #include <vector>
 using std::vector;
 #include <iostream>
