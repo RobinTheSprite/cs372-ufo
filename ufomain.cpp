@@ -20,26 +20,18 @@ int main() {
         cout << endl;
         cout << "Please choose a file / folder path directory [ENTER to quit]: ";
 
-        string rootpath;
-        if (cin.get() == '\n'){
+        string rootPath;
+        if (cin.peek() == '\n'){
+            cout << endl;
             cout << "*****************************************" << endl;
             cout << "Okay, Good bye! :)" << endl;
             cout << "*****************************************" << endl;
             break;
         }
-        cin >> rootpath;
-        //getline(cin, rootpath);
+        cin >> rootPath;
 
 
-        ufo::Ufo organizer(rootpath);
-
-        // if file path cannot be opened...
-        if (rootpath == "") {
-            cout << "*****************************************" << endl;
-            cout << "ERROR: Please enter a valid file / folder path directory." << endl;
-            cout << "*****************************************" << endl;
-            break;
-        }
+        ufo::Ufo organizer(rootPath);
 
         // file path can be opened
         cout << "*****************************************" << endl;
@@ -94,7 +86,7 @@ int main() {
         cout << "*****************************************" << endl;
 
         int counter = 0;
-        for(auto i : currFolder.files){
+        for(const auto& i : currFolder.files){
             counter ++;
             cout << "[" << counter << "]" << i.name << endl;
         }
@@ -109,6 +101,8 @@ int main() {
         cout << "Here you go: " << endl;
         cout << currFolder.files[fileNumber-1].path << endl;
         cout << "*****************************************\n" << endl;
+
+        organizer.openFile(currFolder.files[fileNumber-1]);
 
         cout << "*****************************************" << endl;
         cout << "*****************************************" << endl;
