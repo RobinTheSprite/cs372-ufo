@@ -6,14 +6,6 @@
 #include "ufo.h"
 #include <iostream>
 
-// TODO:
-// Test retrieval of a vector of WIN32_FIND_DATA
-// - creation time
-// - last access time
-// - file size
-// - file name
-//
-
 TEST_CASE("File Retrieval: Empty Path") {
     ufo::Ufo organizer;
     auto retrievedRootFolder = organizer.retrieve();
