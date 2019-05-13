@@ -26,16 +26,9 @@ void printError()
 
 namespace ufo
 {
-    Ufo::Ufo() : _rootPath{"."}
+    void Ufo::setRoot(string path)
     {
-        if (!SetCurrentDirectory(_rootPath.data()))
-        {
-            printError();
-        }
-    }
-
-    Ufo::Ufo(string rootPath) : _rootPath{std::move(rootPath)}
-    {
+        _rootPath = std::move(path);
         _folder.path = _rootPath;
         if (!SetCurrentDirectory(_rootPath.data()))
         {

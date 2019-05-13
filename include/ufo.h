@@ -55,7 +55,9 @@ namespace ufo
       public:
         Ufo();
 
-        explicit Ufo(string rootPath);
+        explicit Ufo(const string &rootPath);
+
+        void setRoot(string);
 
         folder getfolder() const
         {

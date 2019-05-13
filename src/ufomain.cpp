@@ -37,7 +37,7 @@ int main() {
         else if (wordFromUserInput == "organize")
         {
             inputStream >> wordFromUserInput;
-
+            fileOrganizer.setRoot(wordFromUserInput);
         }
     }
 
