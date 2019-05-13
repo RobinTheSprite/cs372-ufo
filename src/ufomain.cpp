@@ -38,6 +38,9 @@ int main() {
         {
             inputStream >> wordFromUserInput;
             fileOrganizer.setRoot(wordFromUserInput);
+
+            inputStream >> wordFromUserInput;
+            fileOrganizer.sortFolder(wordFromUserInput);
         }
     }
 
