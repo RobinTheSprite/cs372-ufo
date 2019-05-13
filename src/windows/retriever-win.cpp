@@ -109,12 +109,6 @@ namespace ufo
 
     vector<ufo::file> Ufo::retrieveFileData()
     {
-        if (!SetCurrentDirectory(_rootPath.data()))
-        {
-            printError();
-            return {};
-        }
-
         return retrieve_recurse(_rootPath);
     }
 

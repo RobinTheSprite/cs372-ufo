@@ -14,7 +14,7 @@ using std::string;
 #include <vector>
 using std::vector;
 
-void BoxPrint(int num, string message);
+void BoxPrint(int num, const string& message);
 
 namespace ufo
 {
