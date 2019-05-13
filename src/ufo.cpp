@@ -3,7 +3,7 @@
 // Source file for Ufo class.
 
 #include "ufo.h"
-#include <algorithm>
+#include "folder.h"
 
 void BoxPrint(int num, const string& message){
     int c = num - 1;
@@ -46,12 +46,50 @@ void BoxPrint(int num, const string& message){
 
 namespace ufo
 {
+    void Ufo::pointFolderAtSelf()
+    {
+        _folder->parentFolder = _folder;
+        _currentFolder = _folder->parentFolder;
+    }
+
+    Ufo::Ufo()
+    {
+        setRoot(".");
+        pointFolderAtSelf();
+    }
+
+    Ufo::Ufo(const string &rootPath)
+    {
+        setRoot(rootPath);
+        pointFolderAtSelf();
+    }
+
+    folder Ufo::getCurrentFolder() const
+    {
+        return *_currentFolder;
+    }
+
+    void Ufo::moveCurrFolderUp()
+    {
+        _currentFolder = _currentFolder->parentFolder;
+    }
+
+    void Ufo::moveCurrFolderDown(const string& folderName)
+    {
+        auto childFolder = _folder->findFolder(folderName);
+
+        if (childFolder)
+        {
+            _currentFolder = childFolder;
+        }
+    }
+
     string getFileExtension(const string& filename)
     {
          size_t extensionPosition = filename.rfind('.');
          if (extensionPosition != string::npos)
          {
-            return filename.substr(extensionPosition, string::npos);
+             return filename.substr(extensionPosition, string::npos);
          }
          else
          {
@@ -68,11 +106,10 @@ namespace ufo
             {
                 string extension = getFileExtension(f.name);
 
-                auto correctFolder = std::find_if(_folder.folders.begin(), _folder.folders.end(),
-                                                  [extension](auto a){return a.name == extension;});
+                auto correctFolder = _folder->findFolder(extension);
 
                 //Is there a folder for that file extension already?
-                if (correctFolder != _folder.folders.end())
+                if (correctFolder)
                 {
                     correctFolder->push_file(f);
                 }
@@ -82,7 +119,7 @@ namespace ufo
                     newFolder.name = extension;
                     newFolder.push_file(f);
 
-                    _folder.push_folder(newFolder);
+                    _folder->push_folder(newFolder);
                 }
             }
         }
@@ -90,22 +127,19 @@ namespace ufo
         {
             for (const auto& f : retrievedFiles)
             {
-                string name = f.name;
-
-                auto correctFolder = std::find_if(_folder.folders.begin(), _folder.folders.end(),
-                                                  [name](auto folder){return folder.name.front() == name.front() ;});
+                auto correctFolder = _folder->findFolder(f.name.substr(1));
 
                 //Is there a folder for that file extension already?
-                if (correctFolder != _folder.folders.end())
+                if (correctFolder)
                 {
-                    correctFolder->files.push_back(f);
+                    correctFolder->push_file(f);
                 }
                 else
                 {
                     folder newFolder;
                     newFolder.name = f.name.front();
-                    newFolder.files.push_back(f);
-                    _folder.folders.push_back(newFolder);
+                    newFolder.push_file(f);
+                    _folder->push_folder(newFolder);
                 }
             }
         }
@@ -117,6 +151,6 @@ namespace ufo
 
     bool Ufo::isEmpty()
     {
-        return _folder.empty();
+        return _folder->empty();
     }
 }

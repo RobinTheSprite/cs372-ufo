@@ -11,6 +11,7 @@ using std::cout;
 using std::endl;
 #include <string>
 #include "ufo.h"
+#include "file.h"
 
 namespace ufo
 {
@@ -111,5 +112,4 @@ namespace ufo
     {
         return retrieve_recurse(_rootPath);
     }
-
 }

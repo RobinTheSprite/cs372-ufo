@@ -13,54 +13,37 @@ using std::endl;
 using std::string;
 #include <vector>
 using std::vector;
+#include <memory>
+using std::shared_ptr;
+#include <map>
+using std::map;
+
+#include "file.h"
+#include "folder.h"
 
 void BoxPrint(int num, const string& message);
 
 namespace ufo
 {
-    struct file
-    {
-        string name;
-        string path;
-        unsigned long size;
-        vector<int> dateCreated;
-        vector<int> dateModified;
-    };
-
-    struct folder
-    {
-        string name;
-        vector<folder> folders;
-        vector<file> files;
-        string path;
-
-        bool empty()
-        {
-            return folders.empty() && files.empty();
-        }
-
-        void push_file(const file &f)
-        {
-            files.push_back(f);
-        }
-
-        void push_folder(const folder &f)
-        {
-            folders.push_back(f);
-        }
-    };
-
     class Ufo
     {
       public:
         Ufo();
 
-        explicit Ufo(string rootPath);
+        explicit Ufo(const string &rootPath);
+
+        void setRoot(string);
 
         folder getfolder() const
         {
-            return _folder;
+            return *_folder;
         }
+
+        folder getCurrentFolder() const;
+
+        void moveCurrFolderUp();
+
+        void moveCurrFolderDown(const string &folderName);
 
         void sortFolder(const string &sortType);
 
@@ -72,8 +55,11 @@ namespace ufo
 
       private:
 
+        void pointFolderAtSelf();
+
         string _rootPath;
-        folder _folder;
+        std::shared_ptr<folder> _folder = std::make_shared<folder>();
+        std::shared_ptr<folder> _currentFolder;
     };
 
 }
