@@ -107,7 +107,7 @@ namespace ufo
         return fileMetadata;
     }
 
-    vector<ufo::file> Ufo::retrieve()
+    vector<ufo::file> Ufo::retrieveFileData()
     {
         if (!SetCurrentDirectory(_rootPath.data()))
         {

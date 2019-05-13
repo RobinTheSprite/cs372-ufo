@@ -64,7 +64,7 @@ namespace ufo
 
         void sortFolder(const string &sortType);
 
-        vector<file> retrieve();
+        vector<file> retrieveFileData();
 
         void openFile(const file &);
 

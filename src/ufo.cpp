@@ -5,12 +5,12 @@
 #include "ufo.h"
 #include <algorithm>
 
-void BoxPrint(int num, string message){
+void BoxPrint(int num, const string& message){
     int c = num - 1;
     int x = message.size();
 
     for(int i = 0; i <= c; i++){
-        for(int i = 0; i <= 2*c + x + 2; i ++)
+        for(int j = 0; j <= 2*c + x + 2; j ++)
             cout << "*";
         cout << "*" << endl;
     }
@@ -38,7 +38,7 @@ void BoxPrint(int num, string message){
     }
 
     for(int i = 0; i <= c; i++){
-        for(int i = 0; i <= 2*c + x + 2; i ++)
+        for(int j = 0; j <= 2*c + x + 2; j ++)
             cout << "*";
         cout << "*" << endl;
     }
@@ -61,7 +61,7 @@ namespace ufo
 
     void Ufo::sortFolder(const string& sortType)
     {
-        auto retrievedFiles = this->retrieve();
+        auto retrievedFiles = this->retrieveFileData();
         if (sortType == "extension")
         {
             for (const auto& f : retrievedFiles)
