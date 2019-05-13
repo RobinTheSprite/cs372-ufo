@@ -18,7 +18,8 @@ void BoxPrint(int num, string message);
 
 namespace ufo
 {
-    struct file {
+    struct file
+    {
         string name;
         string path;
         unsigned long size;
@@ -26,7 +27,8 @@ namespace ufo
         vector<int> dateModified;
     };
 
-    struct folder {
+    struct folder
+    {
         string name;
         vector<folder> folders;
         vector<file> files;
@@ -37,35 +39,38 @@ namespace ufo
             return folders.empty() && files.empty();
         }
 
-        void push_file(const file& f)
+        void push_file(const file &f)
         {
             files.push_back(f);
         }
 
-        void push_folder(const folder& f)
+        void push_folder(const folder &f)
         {
             folders.push_back(f);
         }
     };
 
-    class Ufo{
-    public:
+    class Ufo
+    {
+      public:
         Ufo();
+
         explicit Ufo(string rootPath);
 
-        folder getfolder() const{
+        folder getfolder() const
+        {
             return _folder;
         }
 
-        void sortFolder(const string& sortType);
+        void sortFolder(const string &sortType);
 
         vector<file> retrieve();
 
-        void openFile(const file&);
+        void openFile(const file &);
 
         bool isEmpty();
 
-    private:
+      private:
 
         string _rootPath; //here root means the current root node, as in the folder we are opening, not the whole system's root directory
         folder _folder;
