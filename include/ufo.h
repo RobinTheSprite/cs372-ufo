@@ -72,7 +72,7 @@ namespace ufo
 
       private:
 
-        string _rootPath; //here root means the current root node, as in the folder we are opening, not the whole system's root directory
+        string _rootPath;
         folder _folder;
     };
 
