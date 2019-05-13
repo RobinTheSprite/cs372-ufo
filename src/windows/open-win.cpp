@@ -2,7 +2,7 @@
 // Created by Mark on 4/28/2019.
 //
 
-#include <Windows.h>
+#include <windows.h>
 #include <iostream>
 #include "ufo.h"
 

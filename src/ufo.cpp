@@ -46,14 +46,6 @@ void BoxPrint(int num, string message){
 
 namespace ufo
 {
-    Ufo::Ufo() : _rootPath{"."}
-    {}
-
-    Ufo::Ufo(string rootPath) : _rootPath{std::move(rootPath)}
-    {
-        _folder.path = _rootPath;
-    }
-
     string getFileExtension(const string& filename)
     {
          size_t extensionPosition = filename.rfind('.');

@@ -20,7 +20,7 @@ int main() {
 
     while(true) {
         cout << endl;
-        cout << "Type help for a list of commands or press [ENTER] to exit" << endl;
+        cout << "Type help for a list of commands or press [ENTER] to exit: ";
 
         string userInput;
         getline(cin, userInput);
