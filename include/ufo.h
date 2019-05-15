@@ -31,7 +31,7 @@ namespace ufo
     struct folder : public std::enable_shared_from_this<folder>
     {
         string name;
-        vector<folder> folders;
+        vector<std::shared_ptr<folder>> folders;
         vector<file> files;
         std::shared_ptr<folder> parentFolder;
 
@@ -48,7 +48,7 @@ namespace ufo
         void push_folder(folder &f)
         {
             f.parentFolder = shared_from_this();
-            folders.push_back(f);
+            folders.push_back(std::make_shared<folder>(f));
         }
     };
 
@@ -63,7 +63,7 @@ namespace ufo
 
         folder getfolder() const
         {
-            return _folder;
+            return *_folder;
         }
 
         folder getCurrentFolder() const;
@@ -82,8 +82,10 @@ namespace ufo
 
       private:
 
+        void pointFolderAtSelf();
+
         string _rootPath;
-        folder _folder;
+        std::shared_ptr<folder> _folder = std::make_shared<folder>();
         std::shared_ptr<folder> _currentFolder;
     };
 

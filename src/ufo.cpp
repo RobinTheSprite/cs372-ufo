@@ -46,18 +46,22 @@ void BoxPrint(int num, const string& message){
 
 namespace ufo
 {
+    void Ufo::pointFolderAtSelf()
+    {
+        _folder->parentFolder = _folder;
+        _currentFolder = _folder->parentFolder;
+    }
+
     Ufo::Ufo()
     {
         setRoot(".");
-        _folder.parentFolder = std::make_shared<folder>(_folder);
-        _currentFolder = _folder.parentFolder;
+        pointFolderAtSelf();
     }
 
     Ufo::Ufo(const string &rootPath)
     {
         setRoot(rootPath);
-        _folder.parentFolder = std::make_shared<folder>(_folder);
-        _currentFolder = _folder.parentFolder;
+        pointFolderAtSelf();
     }
 
     folder Ufo::getCurrentFolder() const
@@ -75,12 +79,12 @@ namespace ufo
         auto childFolder = std::find_if(_currentFolder->folders.begin(), _currentFolder->folders.end(),
                                         [folderName](auto folder)
                                         {
-                                            return folder.name == folderName;
+                                            return folder->name == folderName;
                                         });
 
         if (childFolder != _currentFolder->folders.end())
         {
-            _currentFolder = std::make_shared<ufo::folder>(*childFolder);
+            _currentFolder = std::make_shared<ufo::folder>(**childFolder);
         }
     }
 
@@ -106,13 +110,13 @@ namespace ufo
             {
                 string extension = getFileExtension(f.name);
 
-                auto correctFolder = std::find_if(_folder.folders.begin(), _folder.folders.end(),
-                                                  [extension](auto a){return a.name == extension;});
+                auto correctFolder = std::find_if(_folder->folders.begin(), _folder->folders.end(),
+                                                  [extension](auto a){return a->name == extension;});
 
                 //Is there a folder for that file extension already?
-                if (correctFolder != _folder.folders.end())
+                if (correctFolder != _folder->folders.end())
                 {
-                    correctFolder->push_file(f);
+                    (*correctFolder)->push_file(f);
                 }
                 else
                 {
@@ -120,7 +124,7 @@ namespace ufo
                     newFolder.name = extension;
                     newFolder.push_file(f);
 
-                    _folder.push_folder(newFolder);
+                    _folder->push_folder(newFolder);
                 }
             }
         }
@@ -130,20 +134,20 @@ namespace ufo
             {
                 string name = f.name;
 
-                auto correctFolder = std::find_if(_folder.folders.begin(), _folder.folders.end(),
-                                                  [name](auto folder){return folder.name.front() == name.front() ;});
+                auto correctFolder = std::find_if(_folder->folders.begin(), _folder->folders.end(),
+                                                  [name](auto folder){return folder->name.front() == name.front() ;});
 
                 //Is there a folder for that file extension already?
-                if (correctFolder != _folder.folders.end())
+                if (correctFolder != _folder->folders.end())
                 {
-                    correctFolder->files.push_back(f);
+                    (*correctFolder)->files.push_back(f);
                 }
                 else
                 {
                     folder newFolder;
                     newFolder.name = f.name.front();
                     newFolder.files.push_back(f);
-                    _folder.folders.push_back(newFolder);
+                    _folder->push_folder(newFolder);
                 }
             }
         }
@@ -155,6 +159,6 @@ namespace ufo
 
     bool Ufo::isEmpty()
     {
-        return _folder.empty();
+        return _folder->empty();
     }
 }

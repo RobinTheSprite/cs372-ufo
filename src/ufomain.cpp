@@ -61,7 +61,7 @@ int main()
         {
             for (const auto &folder : fileOrganizer.getCurrentFolder().folders)
             {
-                cout << folder.name << endl;
+                cout << folder->name << endl;
             }
 
             for (const auto &file : fileOrganizer.getCurrentFolder().files)
