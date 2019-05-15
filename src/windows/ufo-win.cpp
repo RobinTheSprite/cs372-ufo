@@ -29,7 +29,6 @@ namespace ufo
     void Ufo::setRoot(string path)
     {
         _rootPath = std::move(path);
-        _folder.path = _rootPath;
         if (!SetCurrentDirectory(_rootPath.data()))
         {
             printError();

@@ -49,11 +49,39 @@ namespace ufo
     Ufo::Ufo()
     {
         setRoot(".");
+        _folder.parentFolder = std::make_shared<folder>(_folder);
+        _currentFolder = _folder.parentFolder;
     }
 
     Ufo::Ufo(const string &rootPath)
     {
         setRoot(rootPath);
+        _folder.parentFolder = std::make_shared<folder>(_folder);
+        _currentFolder = _folder.parentFolder;
+    }
+
+    folder Ufo::getCurrentFolder() const
+    {
+        return *_currentFolder;
+    }
+
+    void Ufo::moveCurrFolderUp()
+    {
+        _currentFolder = _currentFolder->parentFolder;
+    }
+
+    void Ufo::moveCurrFolderDown(const string& folderName)
+    {
+        auto childFolder = std::find_if(_currentFolder->folders.begin(), _currentFolder->folders.end(),
+                                        [folderName](auto folder)
+                                        {
+                                            return folder.name == folderName;
+                                        });
+
+        if (childFolder != _currentFolder->folders.end())
+        {
+            _currentFolder = std::make_shared<ufo::folder>(*childFolder);
+        }
     }
 
     string getFileExtension(const string& filename)
