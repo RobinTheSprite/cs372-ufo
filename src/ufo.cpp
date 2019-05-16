@@ -84,7 +84,7 @@ namespace ufo
 
         if (childFolder != _currentFolder->folders.end())
         {
-            _currentFolder = std::make_shared<ufo::folder>(**childFolder);
+            _currentFolder = *childFolder;
         }
     }
 

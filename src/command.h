@@ -17,15 +17,39 @@ class Command
   private:
 };
 
-class UfoOrganizeCommand : public Command
+class UfoCommand : public Command
 {
   public:
-    explicit UfoOrganizeCommand(ufo::Ufo &ufo,
-                                std::stringstream &inputStream);
+    explicit UfoCommand(ufo::Ufo &ufo,
+                        std::stringstream &inputStream);
+
+  protected:
+    ufo::Ufo * _ufoObject;
+    std::stringstream * _inputStream;
+};
+
+class UfoOrganizeCommand : public UfoCommand
+{
+  public:
+    using UfoCommand::UfoCommand;
     void execute() override;
   private:
-    std::shared_ptr<ufo::Ufo> _ufoObject;
-    std::stringstream * _inputStream;
+};
+
+class UfoCdCommand : public UfoCommand
+{
+  public:
+    using UfoCommand::UfoCommand;
+    void execute() override;
+  private:
+};
+
+class UfoLsCommand : public UfoCommand
+{
+  public:
+    using UfoCommand::UfoCommand;
+    void execute() override;
+  private:
 };
 
 

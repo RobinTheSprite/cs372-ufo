@@ -13,6 +13,7 @@ using ufo::Ufo;
 using std::stringstream;
 #include <memory>
 #include <algorithm>
+#include <map>
 #include "command.h"
 
 // Test folder: ..\our_directory_for_testing\ //
@@ -32,40 +33,20 @@ int main()
         stringstream inputStream(userInput);
         string wordFromUserInput;
 
+        std::map<string, std::unique_ptr<Command>> commands;
+        commands.insert({"organize", std::make_unique<UfoOrganizeCommand>(fileOrganizer, inputStream)});
+        commands.insert({"cd", std::make_unique<UfoCdCommand>(fileOrganizer, inputStream)});
+        commands.insert({"ls", std::make_unique<UfoLsCommand>(fileOrganizer, inputStream)});
+
         inputStream >> wordFromUserInput;
 
         if (wordFromUserInput.empty())
         {
             break;
         }
-        else if (wordFromUserInput == "organize")
+        else if (commands.count(wordFromUserInput) != 0)
         {
-            UfoOrganizeCommand uoc(fileOrganizer, inputStream);
-            uoc.execute();
-        }
-        else if (wordFromUserInput == "cd")
-        {
-            inputStream >> wordFromUserInput;
-            if (wordFromUserInput == "..")
-            {
-                fileOrganizer.moveCurrFolderUp();
-            }
-            else
-            {
-                fileOrganizer.moveCurrFolderDown(wordFromUserInput);
-            }
-        }
-        else if (wordFromUserInput == "ls")
-        {
-            for (const auto &folder : fileOrganizer.getCurrentFolder().folders)
-            {
-                cout << folder->name << endl;
-            }
-
-            for (const auto &file : fileOrganizer.getCurrentFolder().files)
-            {
-                cout << file.name << endl;
-            }
+            commands.at(wordFromUserInput)->execute();
         }
     }
 

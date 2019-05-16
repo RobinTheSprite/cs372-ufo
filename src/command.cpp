@@ -5,9 +5,8 @@
 #include "command.h"
 #include <string>
 
-UfoOrganizeCommand::UfoOrganizeCommand(ufo::Ufo &ufo,
-                                       std::stringstream &inputStream)
-: _ufoObject{std::make_shared<ufo::Ufo>(ufo)}, _inputStream{&inputStream}
+UfoCommand::UfoCommand(ufo::Ufo &ufo, std::stringstream &inputStream)
+        : _ufoObject{&ufo}, _inputStream{&inputStream}
 {}
 
 void UfoOrganizeCommand::execute()
@@ -18,4 +17,31 @@ void UfoOrganizeCommand::execute()
 
     *_inputStream >> wordFromUserInput;
     _ufoObject->sortFolder(wordFromUserInput);
+}
+
+void UfoCdCommand::execute()
+{
+    std::string wordFromUserInput;
+    *_inputStream >> wordFromUserInput;
+    if (wordFromUserInput == "..")
+    {
+        _ufoObject->moveCurrFolderUp();
+    }
+    else
+    {
+        _ufoObject->moveCurrFolderDown(wordFromUserInput);
+    }
+}
+
+void UfoLsCommand::execute()
+{
+    for (const auto &folder : _ufoObject->getCurrentFolder().folders)
+    {
+        cout << folder->name << endl;
+    }
+
+    for (const auto &file : _ufoObject->getCurrentFolder().files)
+    {
+        cout << file.name << endl;
+    }
 }
