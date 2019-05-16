@@ -13,6 +13,7 @@ using ufo::Ufo;
 using std::stringstream;
 #include <memory>
 #include <algorithm>
+#include "ufo.h"
 
 // Test folder: ..\our_directory_for_testing\ //
 
