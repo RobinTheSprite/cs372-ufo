@@ -5,9 +5,9 @@
 #include "command.h"
 #include <string>
 
-UfoOrganizeCommand::UfoOrganizeCommand(std::shared_ptr<ufo::Ufo> ufo,
-                                       std::shared_ptr<std::stringstream> inputStream)
-: _ufoObject{std::move(ufo)}, _inputStream{std::move(inputStream)}
+UfoOrganizeCommand::UfoOrganizeCommand(ufo::Ufo &ufo,
+                                       std::stringstream &inputStream)
+: _ufoObject{std::make_shared<ufo::Ufo>(ufo)}, _inputStream{&inputStream}
 {}
 
 void UfoOrganizeCommand::execute()

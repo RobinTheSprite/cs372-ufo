@@ -13,19 +13,19 @@ class Command
 {
   public:
     virtual ~Command() = default;
-    virtual void execute() const =0;
+    virtual void execute() =0;
   private:
 };
 
 class UfoOrganizeCommand : public Command
 {
   public:
-    explicit UfoOrganizeCommand(std::shared_ptr<ufo::Ufo> ufo,
-                                std::shared_ptr<std::stringstream> inputStream);
-    void execute();
+    explicit UfoOrganizeCommand(ufo::Ufo &ufo,
+                                std::stringstream &inputStream);
+    void execute() override;
   private:
     std::shared_ptr<ufo::Ufo> _ufoObject;
-    std::shared_ptr<std::stringstream> _inputStream;
+    std::stringstream * _inputStream;
 };
 
 
