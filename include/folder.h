@@ -5,14 +5,16 @@
 #ifndef CS372_UFO_FOLDER_H
 #define CS372_UFO_FOLDER_H
 
-#include <utility>
-#include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
 #include <map>
 #include "file.h"
 using ufo::file;
+using std::string;
+using std::map;
+using std::shared_ptr;
+using std::vector;
 
 namespace ufo
 {
@@ -23,34 +25,13 @@ namespace ufo
         vector<file> files;
         std::shared_ptr<folder> parentFolder;
 
-        bool empty()
-        {
-            return folders.empty() && files.empty();
-        }
+        bool empty();
 
-        shared_ptr<folder> findFolder(const string& folderName)
-        {
-            auto maybeFolder = folders.find(folderName);
-            if(maybeFolder != folders.end())
-            {
-                return maybeFolder->second;
-            }
-            else
-            {
-                return nullptr;
-            }
-        }
+        shared_ptr<folder> findFolder(const string& folderName);
 
-        void push_file(const file &f)
-        {
-            files.push_back(f);
-        }
+        void push_file(const file &f);
 
-        void push_folder(folder &f)
-        {
-            f.parentFolder = shared_from_this();
-            folders.insert({f.name, std::make_shared<folder>(f)});
-        }
+        void push_folder(folder &f);
     };
 }
 

@@ -5,6 +5,11 @@
 #ifndef CS372_UFO_FILE_H
 #define CS372_UFO_FILE_H
 
+#include <string>
+#include <vector>
+using std::string;
+using std::vector;
+
 namespace ufo
 {
     struct file
