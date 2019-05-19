@@ -76,15 +76,11 @@ namespace ufo
 
     void Ufo::moveCurrFolderDown(const string& folderName)
     {
-        auto childFolder = std::find_if(_currentFolder->folders.begin(), _currentFolder->folders.end(),
-                                        [folderName](auto folder)
-                                        {
-                                            return folder->name == folderName;
-                                        });
+        auto childFolder = _folder->findFolder(folderName);
 
-        if (childFolder != _currentFolder->folders.end())
+        if (childFolder)
         {
-            _currentFolder = *childFolder;
+            _currentFolder = childFolder;
         }
     }
 
@@ -93,7 +89,7 @@ namespace ufo
          size_t extensionPosition = filename.rfind('.');
          if (extensionPosition != string::npos)
          {
-            return filename.substr(extensionPosition, string::npos);
+             return filename.substr(extensionPosition, string::npos);
          }
          else
          {
@@ -110,13 +106,12 @@ namespace ufo
             {
                 string extension = getFileExtension(f.name);
 
-                auto correctFolder = std::find_if(_folder->folders.begin(), _folder->folders.end(),
-                                                  [extension](auto a){return a->name == extension;});
+                auto correctFolder = _folder->findFolder(extension);
 
                 //Is there a folder for that file extension already?
-                if (correctFolder != _folder->folders.end())
+                if (correctFolder)
                 {
-                    (*correctFolder)->push_file(f);
+                    correctFolder->push_file(f);
                 }
                 else
                 {
@@ -132,21 +127,18 @@ namespace ufo
         {
             for (const auto& f : retrievedFiles)
             {
-                string name = f.name;
-
-                auto correctFolder = std::find_if(_folder->folders.begin(), _folder->folders.end(),
-                                                  [name](auto folder){return folder->name.front() == name.front() ;});
+                auto correctFolder = _folder->findFolder(f.name.substr(1));
 
                 //Is there a folder for that file extension already?
-                if (correctFolder != _folder->folders.end())
+                if (correctFolder)
                 {
-                    (*correctFolder)->files.push_back(f);
+                    correctFolder->push_file(f);
                 }
                 else
                 {
                     folder newFolder;
                     newFolder.name = f.name.front();
-                    newFolder.files.push_back(f);
+                    newFolder.push_file(f);
                     _folder->push_folder(newFolder);
                 }
             }

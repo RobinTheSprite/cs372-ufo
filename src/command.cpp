@@ -37,7 +37,7 @@ void UfoLsCommand::execute()
 {
     for (const auto &folder : _ufoObject->getCurrentFolder().folders)
     {
-        cout << folder->name << endl;
+        cout << folder.first << endl;
     }
 
     for (const auto &file : _ufoObject->getCurrentFolder().files)

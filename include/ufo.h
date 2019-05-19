@@ -14,6 +14,9 @@ using std::string;
 #include <vector>
 using std::vector;
 #include <memory>
+using std::shared_ptr;
+#include <map>
+using std::map;
 
 void BoxPrint(int num, const string& message);
 
@@ -31,13 +34,26 @@ namespace ufo
     struct folder : public std::enable_shared_from_this<folder>
     {
         string name;
-        vector<std::shared_ptr<folder>> folders;
+        map<string, std::shared_ptr<folder>> folders;
         vector<file> files;
         std::shared_ptr<folder> parentFolder;
 
         bool empty()
         {
             return folders.empty() && files.empty();
+        }
+
+        shared_ptr<folder> findFolder(const string& folderName)
+        {
+            auto maybeFolder = folders.find(folderName);
+            if(maybeFolder != folders.end())
+            {
+                return maybeFolder->second;
+            }
+            else
+            {
+                return nullptr;
+            }
         }
 
         void push_file(const file &f)
@@ -48,7 +64,7 @@ namespace ufo
         void push_folder(folder &f)
         {
             f.parentFolder = shared_from_this();
-            folders.push_back(std::make_shared<folder>(f));
+            folders.insert({f.name, std::make_shared<folder>(f)});
         }
     };
 
