@@ -5,13 +5,16 @@
 #ifndef CS372_UFO_FILE_H
 #define CS372_UFO_FILE_H
 
-struct file
+namespace ufo
 {
-    string name;
-    string path;
-    unsigned long size;
-    vector<int> dateCreated;
-    vector<int> dateModified;
-};
+    struct file
+    {
+        string name;
+        string path;
+        unsigned long size;
+        vector<int> dateCreated;
+        vector<int> dateModified;
+    };
+}
 
 #endif //CS372_UFO_FILE_H

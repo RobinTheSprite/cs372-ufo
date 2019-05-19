@@ -12,41 +12,46 @@
 #include <memory>
 #include <map>
 #include "file.h"
+using ufo::file;
 
-struct folder : public std::enable_shared_from_this<folder>
+namespace ufo
 {
-    string name;
-    map<string, std::shared_ptr<folder>> folders;
-    vector<file> files;
-    std::shared_ptr<folder> parentFolder;
-
-    bool empty()
+    struct folder : public std::enable_shared_from_this<folder>
     {
-        return folders.empty() && files.empty();
-    }
+        string name;
+        map<string, std::shared_ptr<folder>> folders;
+        vector<file> files;
+        std::shared_ptr<folder> parentFolder;
 
-    shared_ptr<folder> findFolder(const string& folderName)
-    {
-        auto maybeFolder = folders.find(folderName);
-        if(maybeFolder != folders.end())
+        bool empty()
         {
-            return maybeFolder->second;
+            return folders.empty() && files.empty();
         }
-        else
+
+        shared_ptr<folder> findFolder(const string& folderName)
         {
-            return nullptr;
+            auto maybeFolder = folders.find(folderName);
+            if(maybeFolder != folders.end())
+            {
+                return maybeFolder->second;
+            }
+            else
+            {
+                return nullptr;
+            }
         }
-    }
 
-    void push_file(const file &f)
-    {
-        files.push_back(f);
-    }
+        void push_file(const file &f)
+        {
+            files.push_back(f);
+        }
 
-    void push_folder(folder &f)
-    {
-        f.parentFolder = shared_from_this();
-        folders.insert({f.name, std::make_shared<folder>(f)});
-    }
-};
+        void push_folder(folder &f)
+        {
+            f.parentFolder = shared_from_this();
+            folders.insert({f.name, std::make_shared<folder>(f)});
+        }
+    };
+}
+
 #endif //CS372_UFO_FOLDER_H
