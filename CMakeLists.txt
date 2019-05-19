@@ -3,7 +3,6 @@ project(cs372-ufo)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include_directories(include)
 file(GLOB SOURCES src/*.cpp)
 file(GLOB SOURCES-WIN src/windows/*.cpp)
 
@@ -13,3 +12,5 @@ if( WIN32 )
 else()
     add_executable(ufo ${SOURCES})
 endif()
+
+target_include_directories(ufo PRIVATE include)
