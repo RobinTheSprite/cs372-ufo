@@ -2,18 +2,15 @@
 // main function
 
 #include "ufo.h"
+using ufo::Ufo;
 #include <iostream>
 using std::cin;
 using std::cout;
 using std::endl;
 #include <string>
 using std::string;
-using ufo::Ufo;
 #include <sstream>
 using std::stringstream;
-#include <memory>
-#include <algorithm>
-#include <map>
 #include "command.h"
 
 // Test folder: ..\our_directory_for_testing\ //

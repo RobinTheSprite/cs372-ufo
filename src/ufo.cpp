@@ -4,7 +4,6 @@
 
 #include "ufo.h"
 #include "folder.h"
-#include <algorithm>
 
 void BoxPrint(int num, const string& message){
     int c = num - 1;
